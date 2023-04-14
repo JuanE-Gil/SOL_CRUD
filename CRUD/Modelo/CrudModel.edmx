@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TB_CATEGORIAS">
+          <Key>
+            <PropertyRef Name="codigo_ca" />
+          </Key>
+          <Property Name="codigo_ca" Type="int" Nullable="false" />
+          <Property Name="descripcion_ca" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_MEDIDAS">
+          <Key>
+            <PropertyRef Name="codigo_me" />
+          </Key>
+          <Property Name="codigo_me" Type="int" Nullable="false" />
+          <Property Name="descripcion_me" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_PRODUCTOS">
+          <Key>
+            <PropertyRef Name="codigo_pr" />
+          </Key>
+          <Property Name="codigo_pr" Type="int" Nullable="false" />
+          <Property Name="descripcion_pr" Type="varchar" MaxLength="30" />
+          <Property Name="marca_pr" Type="varchar" MaxLength="30" />
+          <Property Name="codigo_ca" Type="int" Nullable="false" />
+          <Property Name="codigo_me" Type="int" Nullable="false" />
+          <Property Name="stock_actual" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="fecha_crea" Type="datetime" Nullable="false" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TB_PRODUC__codig__38996AB5">
+          <End Role="TB_CATEGORIAS" Type="Self.TB_CATEGORIAS" Multiplicity="1" />
+          <End Role="TB_PRODUCTOS" Type="Self.TB_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CATEGORIAS">
+              <PropertyRef Name="codigo_ca" />
+            </Principal>
+            <Dependent Role="TB_PRODUCTOS">
+              <PropertyRef Name="codigo_ca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_PRODUC__codig__398D8EEE">
+          <End Role="TB_MEDIDAS" Type="Self.TB_MEDIDAS" Multiplicity="1" />
+          <End Role="TB_PRODUCTOS" Type="Self.TB_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_MEDIDAS">
+              <PropertyRef Name="codigo_me" />
+            </Principal>
+            <Dependent Role="TB_PRODUCTOS">
+              <PropertyRef Name="codigo_me" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="USP_LISTADO_CA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_LISTADO_ME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="USP_LISTADO_PR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cTexto" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CrudModelStoreContainer">
+          <EntitySet Name="TB_CATEGORIAS" EntityType="Self.TB_CATEGORIAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_MEDIDAS" EntityType="Self.TB_MEDIDAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_PRODUCTOS" EntityType="Self.TB_PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TB_PRODUC__codig__38996AB5" Association="Self.FK__TB_PRODUC__codig__38996AB5">
+            <End Role="TB_CATEGORIAS" EntitySet="TB_CATEGORIAS" />
+            <End Role="TB_PRODUCTOS" EntitySet="TB_PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_PRODUC__codig__398D8EEE" Association="Self.FK__TB_PRODUC__codig__398D8EEE">
+            <End Role="TB_MEDIDAS" EntitySet="TB_MEDIDAS" />
+            <End Role="TB_PRODUCTOS" EntitySet="TB_PRODUCTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TB_CATEGORIAS">
+          <Key>
+            <PropertyRef Name="codigo_ca" />
+          </Key>
+          <Property Name="codigo_ca" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_ca" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TB_PRODUCTOS" Relationship="Self.FK__TB_PRODUC__codig__38996AB5" FromRole="TB_CATEGORIAS" ToRole="TB_PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="TB_MEDIDAS">
+          <Key>
+            <PropertyRef Name="codigo_me" />
+          </Key>
+          <Property Name="codigo_me" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_me" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TB_PRODUCTOS" Relationship="Self.FK__TB_PRODUC__codig__398D8EEE" FromRole="TB_MEDIDAS" ToRole="TB_PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="TB_PRODUCTOS">
+          <Key>
+            <PropertyRef Name="codigo_pr" />
+          </Key>
+          <Property Name="codigo_pr" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_pr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="marca_pr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="codigo_ca" Type="Int32" Nullable="false" />
+          <Property Name="codigo_me" Type="Int32" Nullable="false" />
+          <Property Name="stock_actual" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="fecha_crea" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TB_CATEGORIAS" Relationship="Self.FK__TB_PRODUC__codig__38996AB5" FromRole="TB_PRODUCTOS" ToRole="TB_CATEGORIAS" />
+          <NavigationProperty Name="TB_MEDIDAS" Relationship="Self.FK__TB_PRODUC__codig__398D8EEE" FromRole="TB_PRODUCTOS" ToRole="TB_MEDIDAS" />
+        </EntityType>
+        <Association Name="FK__TB_PRODUC__codig__38996AB5">
+          <End Role="TB_CATEGORIAS" Type="Self.TB_CATEGORIAS" Multiplicity="1" />
+          <End Role="TB_PRODUCTOS" Type="Self.TB_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_CATEGORIAS">
+              <PropertyRef Name="codigo_ca" />
+            </Principal>
+            <Dependent Role="TB_PRODUCTOS">
+              <PropertyRef Name="codigo_ca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TB_PRODUC__codig__398D8EEE">
+          <End Role="TB_MEDIDAS" Type="Self.TB_MEDIDAS" Multiplicity="1" />
+          <End Role="TB_PRODUCTOS" Type="Self.TB_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_MEDIDAS">
+              <PropertyRef Name="codigo_me" />
+            </Principal>
+            <Dependent Role="TB_PRODUCTOS">
+              <PropertyRef Name="codigo_me" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrudEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_CATEGORIAS" EntityType="Self.TB_CATEGORIAS" />
+          <EntitySet Name="TB_MEDIDAS" EntityType="Self.TB_MEDIDAS" />
+          <EntitySet Name="TB_PRODUCTOS" EntityType="Self.TB_PRODUCTOS" />
+          <AssociationSet Name="FK__TB_PRODUC__codig__38996AB5" Association="Self.FK__TB_PRODUC__codig__38996AB5">
+            <End Role="TB_CATEGORIAS" EntitySet="TB_CATEGORIAS" />
+            <End Role="TB_PRODUCTOS" EntitySet="TB_PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TB_PRODUC__codig__398D8EEE" Association="Self.FK__TB_PRODUC__codig__398D8EEE">
+            <End Role="TB_MEDIDAS" EntitySet="TB_MEDIDAS" />
+            <End Role="TB_PRODUCTOS" EntitySet="TB_PRODUCTOS" />
+          </AssociationSet>
+          <FunctionImport Name="USP_LISTADO_CA" ReturnType="Collection(CrudModel.USP_LISTADO_CA_Result)" />
+          <FunctionImport Name="USP_LISTADO_ME" ReturnType="Collection(CrudModel.USP_LISTADO_ME_Result)" />
+          <FunctionImport Name="USP_LISTADO_PR" ReturnType="Collection(CrudModel.USP_LISTADO_PR_Result)">
+            <Parameter Name="cTexto" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="USP_LISTADO_CA_Result">
+          <Property Type="String" Name="descripcion_ca" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="codigo_ca" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="USP_LISTADO_ME_Result">
+          <Property Type="String" Name="descripcion_me" Nullable="false" MaxLength="30" />
+          <Property Type="Int32" Name="codigo_me" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="USP_LISTADO_PR_Result">
+          <Property Type="Int32" Name="codigo_pr" Nullable="false" />
+          <Property Type="String" Name="descripcion_pr" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="marca_pr" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="descripcion_me" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="descripcion_ca" Nullable="false" MaxLength="30" />
+          <Property Type="Decimal" Name="stock_actual" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="DateTime" Name="fecha_crea" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="codigo_ca" Nullable="false" />
+          <Property Type="Int32" Name="codigo_me" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CrudModelStoreContainer" CdmEntityContainer="CrudEntities">
+          <EntitySetMapping Name="TB_CATEGORIAS">
+            <EntityTypeMapping TypeName="CrudModel.TB_CATEGORIAS">
+              <MappingFragment StoreEntitySet="TB_CATEGORIAS">
+                <ScalarProperty Name="codigo_ca" ColumnName="codigo_ca" />
+                <ScalarProperty Name="descripcion_ca" ColumnName="descripcion_ca" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_MEDIDAS">
+            <EntityTypeMapping TypeName="CrudModel.TB_MEDIDAS">
+              <MappingFragment StoreEntitySet="TB_MEDIDAS">
+                <ScalarProperty Name="codigo_me" ColumnName="codigo_me" />
+                <ScalarProperty Name="descripcion_me" ColumnName="descripcion_me" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_PRODUCTOS">
+            <EntityTypeMapping TypeName="CrudModel.TB_PRODUCTOS">
+              <MappingFragment StoreEntitySet="TB_PRODUCTOS">
+                <ScalarProperty Name="codigo_pr" ColumnName="codigo_pr" />
+                <ScalarProperty Name="descripcion_pr" ColumnName="descripcion_pr" />
+                <ScalarProperty Name="marca_pr" ColumnName="marca_pr" />
+                <ScalarProperty Name="codigo_ca" ColumnName="codigo_ca" />
+                <ScalarProperty Name="codigo_me" ColumnName="codigo_me" />
+                <ScalarProperty Name="stock_actual" ColumnName="stock_actual" />
+                <ScalarProperty Name="fecha_crea" ColumnName="fecha_crea" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="USP_LISTADO_CA" FunctionName="CrudModel.Store.USP_LISTADO_CA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CrudModel.USP_LISTADO_CA_Result">
+                <ScalarProperty Name="descripcion_ca" ColumnName="descripcion_ca" />
+                <ScalarProperty Name="codigo_ca" ColumnName="codigo_ca" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_LISTADO_ME" FunctionName="CrudModel.Store.USP_LISTADO_ME">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CrudModel.USP_LISTADO_ME_Result">
+                <ScalarProperty Name="descripcion_me" ColumnName="descripcion_me" />
+                <ScalarProperty Name="codigo_me" ColumnName="codigo_me" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_LISTADO_PR" FunctionName="CrudModel.Store.USP_LISTADO_PR">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CrudModel.USP_LISTADO_PR_Result">
+                <ScalarProperty Name="codigo_pr" ColumnName="codigo_pr" />
+                <ScalarProperty Name="descripcion_pr" ColumnName="descripcion_pr" />
+                <ScalarProperty Name="marca_pr" ColumnName="marca_pr" />
+                <ScalarProperty Name="descripcion_me" ColumnName="descripcion_me" />
+                <ScalarProperty Name="descripcion_ca" ColumnName="descripcion_ca" />
+                <ScalarProperty Name="stock_actual" ColumnName="stock_actual" />
+                <ScalarProperty Name="fecha_crea" ColumnName="fecha_crea" />
+                <ScalarProperty Name="codigo_ca" ColumnName="codigo_ca" />
+                <ScalarProperty Name="codigo_me" ColumnName="codigo_me" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
