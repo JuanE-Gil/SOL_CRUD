@@ -81,6 +81,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CrudModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\ProductosMapper.cs" />
     <Compile Include="Modelo\TB_CATEGORIAS.cs">
       <DependentUpon>CrudModel.tt</DependentUpon>
     </Compile>

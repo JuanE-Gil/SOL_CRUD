@@ -41,5 +41,26 @@ namespace CRUD.Controlador
             return query.ToList();
         }
 
+        public List<ProductosMapper> FindAllMapper() {
+            var query = from productos in entitiesDB.TB_PRODUCTOS
+                        select new ProductosMapper
+                        {
+                            codigo_pr = productos.codigo_pr,
+                            descripcion_pr = productos.descripcion_pr,
+                            marca_pr = productos.marca_pr,
+                            codigo_ca = productos.TB_CATEGORIAS.descripcion_ca,
+                            codigo_me = productos.TB_MEDIDAS.descripcion_me,
+                            stock_actual = productos.stock_actual,
+                            fecha_crea = productos.fecha_crea,
+                        };
+            return query.ToList();
+        }
+
+        public List<USP_LISTADO_PR_Result> listado_pr(string cTexto) {
+            using (CrudEntities contex = new CrudEntities()) {
+                return contex.USP_LISTADO_PR(cTexto).ToList();
+            }
+
+        }
     }
 }
