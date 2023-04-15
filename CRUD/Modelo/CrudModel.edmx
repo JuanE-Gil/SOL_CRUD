@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TB_CATEGORIAS">
           <Key>
             <PropertyRef Name="codigo_ca" />
@@ -32,7 +32,6 @@
           <Property Name="codigo_me" Type="int" Nullable="false" />
           <Property Name="stock_actual" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="fecha_crea" Type="datetime" Nullable="false" />
-          <Property Name="activo" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK__TB_PRODUC__codig__38996AB5">
           <End Role="TB_CATEGORIAS" Type="Self.TB_CATEGORIAS" Multiplicity="1" />
@@ -76,8 +75,7 @@
             <End Role="TB_PRODUCTOS" EntitySet="TB_PRODUCTOS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -104,13 +102,12 @@
             <PropertyRef Name="codigo_pr" />
           </Key>
           <Property Name="codigo_pr" Type="Int32" Nullable="false" />
-          <Property Name="descripcion_pr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_pr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="marca_pr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="codigo_ca" Type="Int32" Nullable="false" />
           <Property Name="codigo_me" Type="Int32" Nullable="false" />
           <Property Name="stock_actual" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="fecha_crea" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TB_CATEGORIAS" Relationship="Self.FK__TB_PRODUC__codig__38996AB5" FromRole="TB_PRODUCTOS" ToRole="TB_CATEGORIAS" />
           <NavigationProperty Name="TB_MEDIDAS" Relationship="Self.FK__TB_PRODUC__codig__398D8EEE" FromRole="TB_PRODUCTOS" ToRole="TB_MEDIDAS" />
         </EntityType>
@@ -153,7 +150,7 @@
           <FunctionImport Name="USP_LISTADO_CA" ReturnType="Collection(CrudModel.USP_LISTADO_CA_Result)" />
           <FunctionImport Name="USP_LISTADO_ME" ReturnType="Collection(CrudModel.USP_LISTADO_ME_Result)" />
           <FunctionImport Name="USP_LISTADO_PR" ReturnType="Collection(CrudModel.USP_LISTADO_PR_Result)">
-            <Parameter Name="cTexto" Mode="In" Type="String" />
+          <Parameter Name="cTexto" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="USP_LISTADO_CA_Result">
@@ -209,7 +206,6 @@
                 <ScalarProperty Name="codigo_me" ColumnName="codigo_me" />
                 <ScalarProperty Name="stock_actual" ColumnName="stock_actual" />
                 <ScalarProperty Name="fecha_crea" ColumnName="fecha_crea" />
-                <ScalarProperty Name="activo" ColumnName="activo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

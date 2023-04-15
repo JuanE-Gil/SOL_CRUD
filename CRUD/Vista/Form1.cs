@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 
 using CRUD.Controlador;
+using CRUD.Modelo;
 
 namespace CRUD.Vista
 {
@@ -18,7 +19,7 @@ namespace CRUD.Vista
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            dgvProductos.DataSource = productos.FindAll();
+            Refrescar();
         }
 
         private void CargarMedidas() {
@@ -33,6 +34,20 @@ namespace CRUD.Vista
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e) {
+            int codigo_pr = Convert.ToInt32(TxtCodigo.Text);
+            string descripcion = TxtDrescripcion.Text;
+            string marca = TxtMarca.Text;
+            int categoria = Convert.ToInt32(CboCategorias.SelectedValue);
+            int medidas = Convert.ToInt32(CboMedidas.SelectedValue);
+            decimal stock = Convert.ToDecimal(TxtStock.Text);
+            DateTime fecha = DtpFecha.Value;
+
+            TB_PRODUCTOS _PRODUCTOS = new TB_PRODUCTOS(codigo_pr, descripcion, marca, categoria, medidas, stock, fecha);
+
+            productos.Update(_PRODUCTOS);
+
+            MessageBox.Show("!Nuevo Producto Actualizado¡", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Refrescar();
 
         }
 
@@ -40,6 +55,18 @@ namespace CRUD.Vista
             int codigo_pr = Convert.ToInt32(TxtCodigo.Text);
             string descripcion = TxtDrescripcion.Text;
             string marca = TxtMarca.Text;
+            int categoria = Convert.ToInt32(CboCategorias.SelectedValue);
+            int medidas = Convert.ToInt32(CboMedidas.SelectedValue);
+            decimal stock = Convert.ToDecimal(TxtStock.Text);
+            DateTime fecha = DtpFecha.Value;
+
+            TB_PRODUCTOS _PRODUCTOS = new TB_PRODUCTOS(codigo_pr, descripcion, marca, categoria, medidas, stock, fecha);
+
+            productos.Insert(_PRODUCTOS);
+
+            MessageBox.Show("!Nuevo Producto agregado¡", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Refrescar();
+
         }
 
         private void BtnEliminar_Click(object sender, EventArgs e) {
@@ -48,6 +75,24 @@ namespace CRUD.Vista
 
         private void BtnCancelar_Click(object sender, EventArgs e) {
 
+        }
+
+        private void Refrescar() {
+            dgvProductos.DataSource = productos.FindAll();
+        }
+
+        private void LimpiarDatos() {
+            TxtCodigo.Text = "";
+            TxtDrescripcion.Text = "";
+            TxtMarca.Text = "";
+            CboCategorias.SelectedIndex = 0;
+            CboMedidas.SelectedIndex = 0;
+            TxtStock.Text = "";
+            DtpFecha.Value = DateTime.Now;
+
+            Refrescar();
+            BtnActualizar.Visible = false;
+            BtnCancelar.Enabled = false;
         }
     }
 }

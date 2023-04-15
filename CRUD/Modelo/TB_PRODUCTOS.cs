@@ -11,9 +11,23 @@ namespace CRUD.Modelo
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class TB_PRODUCTOS
     {
+        public TB_PRODUCTOS() {
+        }
+
+        public TB_PRODUCTOS(int codigo_pr, string descripcion_pr, string marca_pr, int codigo_ca, int codigo_me, decimal stock_actual, DateTime fecha_crea) {
+            this.codigo_pr = codigo_pr;
+            this.descripcion_pr = descripcion_pr;
+            this.marca_pr = marca_pr;
+            this.codigo_ca = codigo_ca;
+            this.codigo_me = codigo_me;
+            this.stock_actual = stock_actual;
+            this.fecha_crea = fecha_crea;
+        }
+
+
         public int codigo_pr { get; set; }
         public string descripcion_pr { get; set; }
         public string marca_pr { get; set; }
@@ -21,8 +35,7 @@ namespace CRUD.Modelo
         public int codigo_me { get; set; }
         public decimal stock_actual { get; set; }
         public System.DateTime fecha_crea { get; set; }
-        public bool activo { get; set; }
-    
+
         public virtual TB_CATEGORIAS TB_CATEGORIAS { get; set; }
         public virtual TB_MEDIDAS TB_MEDIDAS { get; set; }
     }

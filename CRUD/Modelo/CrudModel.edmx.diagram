@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e06d1c6f49c0419db3ba59a5b446a197" Name="Diagram1">
-        <EntityTypeShape EntityType="CrudModel.TB_CATEGORIAS" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="CrudModel.TB_MEDIDAS" Width="1.5" PointX="5.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CrudModel.TB_PRODUCTOS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CrudModel.TB_CATEGORIAS" Width="1.5" PointX="2.125" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CrudModel.TB_MEDIDAS" Width="1.5" PointX="6.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CrudModel.TB_PRODUCTOS" Width="1.5" PointX="4.5" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CrudModel.FK__TB_PRODUC__codig__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="CrudModel.FK__TB_PRODUC__codig__398D8EEE" ManuallyRouted="false" />
       </Diagram>
